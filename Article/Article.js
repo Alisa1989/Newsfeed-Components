@@ -112,3 +112,83 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+/*
+<div class="article">
+    <h2>{title of the article}</h2>
+    <p class="date">{date of the article}</p>
+
+    {three separate paragraph elements}
+
+    <span class='expandButton'></span>
+  </div>
+*/
+
+function createComponent(title, date, firstParagraph, secondParagraph, thirdParagraph) {
+
+  const article = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const articleParagraph1 = document.createElement('p');
+  const articleParagraph2 = document.createElement('p');
+  const articleParagraph3 = document.createElement('p');
+  const expandButton = document.createElement('span');
+
+  article.classList.add('article');
+  articleDate.classList.add('date');
+  expandButton.classList.add('expandButton');
+
+  article.appendChild(articleTitle);
+  article.appendChild(articleDate);
+  article.appendChild(articleParagraph1);
+  article.appendChild(articleParagraph2);
+  article.appendChild(articleParagraph3);
+  article.appendChild(expandButton);
+
+  //inserting content
+  articleTitle.textContent = title;
+  articleDate.textContent = date;
+  articleParagraph1.textContent = firstParagraph;
+  articleParagraph2.textContent = secondParagraph;
+  articleParagraph3.textContent = thirdParagraph;
+
+  //event listener
+  expandButton.addEventListener('click', ()=>
+  {
+    article.classList.toggle("article-open");
+  });
+
+  return article;
+}
+
+//create articles
+  const firstArticle = createComponent(data[0].title, data[0].date, data[0].firstParagraph, data[0].secondParagraph, data[0].thirdParagraph);
+  const secondArticle = createComponent(data[1].title, data[1].date, data[1].firstParagraph, data[1].secondParagraph, data[1].thirdParagraph);
+  const thirdArticle = createComponent(data[2].title, data[2].date, data[2].firstParagraph, data[2].secondParagraph, data[2].thirdParagraph);
+  const fourthArticle = createComponent(data[3].title, data[3].date, data[3].firstParagraph, data[3].secondParagraph, data[3].thirdParagraph);
+
+//append articles
+  const theArticles = document.querySelector('.articles');
+
+  theArticles.appendChild(firstArticle);
+  theArticles.appendChild(secondArticle);
+  theArticles.appendChild(thirdArticle);
+  theArticles.appendChild(fourthArticle);
+
+// map over data and add a component to each object then append it ---------- NOT DISPLAYING
+
+  const addComponent = data.map( (element)=> 
+  {
+    element.fourthParagraph = "And that is all folks!!!";
+  })
+  
+ // console.log(addComponent);
+
+// add new article to array and post it
+
+  data.push({title: "Hello Everybody", date: "April 16th 2020", firstParagraph: "here is the thing...", secondParagraph: "here is another thing...", thirdParagraph: "one last thing..." });
+  const fifthArticle = createComponent(data[4].title, data[4].date, data[4].firstParagraph, data[4].secondParagraph, data[4].thirdParagraph);
+  theArticles.appendChild(fifthArticle);
+
+  
+  //Question what is an event.target?
