@@ -12,10 +12,10 @@ let menuItems = [
 /* 
 
   Step 1: Write a function that will create a menu component as seen below:
-
-  <div class="menu">
-    <ul>
-      {each menu item as a list item}
+                                                 
+  <div class="menu">                             // menu      
+    <ul>                                         // menubar aka accordion
+      {each menu item as a list item}            // menuComponent
     </ul>
   </div>
 
@@ -33,3 +33,41 @@ let menuItems = [
   Step 6: add the menu component to the DOM.
   
 */
+
+
+function createMenuComponent(title)
+{
+  const singleComponent = document.createElement('li');
+  singleComponent.textContent = title;
+
+  menuBar.appendChild(singleComponent);
+ 
+  return menuBar;
+}
+
+// create menu and menuBar
+const menu = document.createElement('div');
+menu.classList.add('menu');
+menu.classList.add('menu--open');
+
+const menuBar = document.createElement('ul');
+
+//append menu to header and menuBar to menu
+const header = document.querySelector('.header');
+header.appendChild(menu);
+menu.appendChild(menuBar);
+
+//add menuButton action
+let menuButton = document.querySelector('.menu-button');
+menuButton.addEventListener('click', ()=>
+{
+  menu.classList.toggle('menu--open');
+  console.log('button clicked!');
+})
+
+//put menuItems in menu
+menuItems.forEach((itemObj) => 
+  {
+  const menuComponent = createMenuComponent(itemObj);
+  } 
+);
